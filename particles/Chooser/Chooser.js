@@ -19,7 +19,15 @@ class Chooser extends Particle {
       if (inputList.length > 0) {
         // say that I need an 'action' slot to continue
         var slot = await this.requireSlot('action'); // vs. this.whenSlot('action')
-        slot.render('OMG CHOOSER');
+        let names = inputList.map(entity => entity.data.name);
+        slot.render(`
+<div>    
+Choose one:<br>
+  <div style="padding-left: 12px">
+  ${names.join('<br>')}
+  </div>
+</div>
+      `.trim());
       } else {
         this.releaseSlot('action');
       }
